@@ -1,0 +1,36 @@
+
+.body{
+   margin: 0;
+    background-color: #0B2434;
+    padding: 20px;
+}
+
+.main{
+     background-color: #F5F5F5;
+    height: 400px;
+    max-width: auto;
+    border-radius: 5px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.small-box{
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  font-size: large;
+  font-weight: bolder;
+}
+.grid-container{
+  margin : 100px;
+  display: grid;
+  grid-template: auto auto / repeat(3, 0.125fr);
+  row-gap: 1px;
+  justify-content: center;
+}
+.sub-grid{
+  display: grid;
+  grid-template-columns: repeat(3,0fr);
+}
