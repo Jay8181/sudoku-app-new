@@ -6,10 +6,7 @@ import newStartingBoard from './sudoku-generator';
 import React from 'react';
 
 
-function App() {
-
-
-  
+function App() {  
   const[puzzle_values,setPuzzleValue] = React.useState(allNewBoxes());
   function allNewBoxes() {
     const pz_v = (newStartingBoard(10)[1])
@@ -34,15 +31,28 @@ function generateObject(val)
   })
 }
 
- function changeValue(event)
+ function changeValue(id,value)
  {
   console.log("JAY");
-    const{id,value} = event.target;
-    console.log(event.target.value)
-    setPuzzleValue((prevState)=>prevState.map((item)=>{
-       return(item.id === id? {...item,val:Number(value)}:item);
-    }))
-    console.log(puzzle_values);
+    // const{id,value} = event.target;
+    //console.log(event.target.id)
+    console.log(value);
+    // setPuzzleValue((prevState)=>prevState.map((item)=>{
+    //    return(item.id === id? {...item,val:}:item);
+    // }))
+    setPuzzleValue((prevState)=>{
+      console.log("JAY")
+      const a =[]
+      for(let i = 0;i<81;i++)
+      {
+        if(prevState[i].id === id)
+           a.push({id:id,isHeld:false,val:Number(value)});
+        else 
+           a.push(prevState[i])
+      }
+      console.log(a);
+      return(a);
+    })
  }
 
 
@@ -53,7 +63,7 @@ function generateObject(val)
      return BoardComponent;
   }
 const [mainBoard,changeMainBoard] = React.useState(createBoardComponent())
-
+React.useEffect(()=>{console.log(puzzle_values)},[puzzle_values])
   return(<main className='main'>
   <div className='grid-container'>
     {mainBoard}
