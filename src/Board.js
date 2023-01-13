@@ -2,10 +2,11 @@ import React from 'react';
 
 export default function Board(props)
 {
+    
     return(
-            
-         props.value > 0 ?<input type = "text" className='small-box' value={props.value} />:
-         <input type = "text" className='small-box' onChange = {props.changeValue}/>
+           
+          props.val  ?<input type = "text" className='small-box' defaultValue={props.val} />:
+         <input type = "text" key = {props.id} id = {props.id} className='small-box' value = {props.val} onChange = {(event)=>{props.changeValue(event)}}/>
     )
     
 }

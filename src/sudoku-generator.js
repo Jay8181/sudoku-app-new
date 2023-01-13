@@ -159,7 +159,6 @@ const BLANK_BOARD = [
       // Clone the populated board and poke holes in it. 
       // Stored the removed values for clues
       let [removedVals, startingBoard] = pokeHoles( solvedBoard.map ( row => row.slice() ), holes)
-      console.log(startingBoard);
       return [removedVals, startingBoard, solvedBoard]
       
     } catch (error){ 

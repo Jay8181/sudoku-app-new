@@ -9,9 +9,10 @@ import React from 'react';
 function App() {
 
 
-  const pz_v = (newStartingBoard(10)[1])
+  
   const[puzzle_values,setPuzzleValue] = React.useState(allNewBoxes());
   function allNewBoxes() {
+    const pz_v = (newStartingBoard(10)[1])
     let newBoard = []
     for(let i = 0;i<9;i++)
     {
@@ -20,34 +21,38 @@ function App() {
         newBoard.push(generateObject(pz_v[i][j]));
       }
     }
-    console.log(newBoard);
     return(newBoard)
 }
 
-function generateObject(value)
+function generateObject(val)
 {
   return({
     id:nanoid(),
-    isHeld:false,
-    value:value
+    isHeld:val===0 ?false:true,
+    val:val===0?undefined:val ,
+    
   })
 }
 
- function changeValue(id)
+ function changeValue(event)
  {
+  console.log("JAY");
+    const{id,value} = event.target;
+    console.log(event.target.value)
     setPuzzleValue((prevState)=>prevState.map((item)=>{
-           return(item.id === id ? {...item,value:5}:item)
+       return(item.id === id? {...item,val:Number(value)}:item);
     }))
+    console.log(puzzle_values);
  }
 
 
   function createBoardComponent()
   {
      const BoardComponent = puzzle_values.map(item =>
-     <Board key = {item.id} id={item.id} isHeld={item.isHeld} value = {item.value} changeValue = {()=>{changeValue(item.id)}}/>)
+     <Board key = {item.id} id={item.id} isHeld={item.isHeld} val = {item.val} changeValue = {changeValue}/>)
      return BoardComponent;
   }
-  const [mainBoard,setMainBoard] = React.useState(createBoardComponent());
+const [mainBoard,changeMainBoard] = React.useState(createBoardComponent())
 
   return(<main className='main'>
   <div className='grid-container'>
