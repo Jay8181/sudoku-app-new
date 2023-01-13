@@ -14,15 +14,14 @@ function App() {
    
 
 
-  const generated_puzzle = newStartingBoard(10)[1];
 
 
 
   const [puzzle_values,setPuzzle_values] = React.useState(puzzle_generate())
-  console.log(generated_puzzle);
   let count = 0;
   function puzzle_generate()
   { 
+    const generated_puzzle = newStartingBoard(10)[1];
     let pz_v = []
     for(let k = 0;k<9;k+=3)
     {
@@ -64,17 +63,8 @@ function App() {
 
 function handleChange(id)
 {
-  console.log(id);
+  console.log(id)
 }
-
-
-
-
-
-
-
-
-
 
 
 
@@ -109,7 +99,7 @@ function handleChange(id)
     for(let j = 0;j<9;j++)
     {
       const a1 = box();
-      array.push(<div className='sub-grid'>{a1}</div>);
+      array.push(<div className='sub-grid' >{a1}</div>);
     }
     return(array)
   }
