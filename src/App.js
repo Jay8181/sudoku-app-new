@@ -9,112 +9,52 @@ import React from 'react';
 function App() {
 
 
-
-
-   
-
-
-
-
-
-  const [puzzle_values,setPuzzle_values] = React.useState(puzzle_generate())
-  let count = 0;
-  function puzzle_generate()
-  { 
-    const generated_puzzle = newStartingBoard(10)[1];
-    let pz_v = []
-    for(let k = 0;k<9;k+=3)
+  const pz_v = (newStartingBoard(10)[1])
+  const[puzzle_values,setPuzzleValue] = React.useState(allNewBoxes());
+  function allNewBoxes() {
+    let newBoard = []
+    for(let i = 0;i<9;i++)
     {
-      for(let i = 0+k;i<3+k;i++)
+      for(let j = 0;j<9;j++)
       {
-       for(let j = 0;j<3;j++)
-       {
-        pz_v.push(generated_puzzle[i][j]);
-       }
-   
-      }
-      for(let i = 0+k;i<3+k;i++)
-      {
-       for(let j = 3;j<6;j++)
-       {
-        pz_v.push(generated_puzzle[i][j]);
-       }
-   
-      }
-      for(let i = 0+k;i<3+k;i++)
-      {
-       for(let j = 6;j<9;j++)
-       {
-        pz_v.push(generated_puzzle[i][j]);
-       }
-   
+        newBoard.push(generateObject(pz_v[i][j]));
       }
     }
-    return(pz_v);   
-  }
-  
-
-
-
-
-
-
-
-
-function handleChange(id)
-{
-  console.log(id)
+    console.log(newBoard);
+    return(newBoard)
 }
 
+function generateObject(value)
+{
+  return({
+    id:nanoid(),
+    isHeld:false,
+    value:value
+  })
+}
+
+ function changeValue(id)
+ {
+    setPuzzleValue((prevState)=>prevState.map((item)=>{
+           return(item.id === id ? {...item,value:5}:item)
+    }))
+ }
 
 
-  const box = ()=>{
-    const obj = attributes();
-    let array = [];
-    for(let i = 0;i<9;i++)
-    {
-      array.push(<Board id = {obj[i].id} value={obj[i].value} isHeld = {obj[i].isHeld} handleChange = {()=>handleChange(obj[i].id)}/>);
-    }
-    return(array);
+  function createBoardComponent()
+  {
+     const BoardComponent = puzzle_values.map(item =>
+     <Board key = {item.id} id={item.id} isHeld={item.isHeld} value = {item.value} changeValue = {()=>{changeValue(item.id)}}/>)
+     return BoardComponent;
   }
+  const [mainBoard,setMainBoard] = React.useState(createBoardComponent());
 
-  
-  
-  const attributes = ()=>{
-    let array = [];
-    for(let i = 0;i<9;i++)
-    {
-        array.push({
-           id:nanoid(),
-           value:puzzle_values[count],
-           isHeld : false,
-        });
-        count++;
-    }
-    return(array);
-  }
+  return(<main className='main'>
+  <div className='grid-container'>
+    {mainBoard}
+  </div>
+</main>)
 
-  const bigBox = ()=>{
-    let array = [];
-    for(let j = 0;j<9;j++)
-    {
-      const a1 = box();
-      array.push(<div className='sub-grid' >{a1}</div>);
-    }
-    return(array)
-  }
-
-
-  const [bigBoss,setBigBoss] = React.useState(bigBox);
-
-  return (
-    <main className='main'>
-      <div className='grid-container'>
-        {bigBoss}
-      </div>
-    </main>
-    
-  )
 }
 
 export default App;
