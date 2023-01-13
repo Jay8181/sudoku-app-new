@@ -3,23 +3,34 @@ import './App.css';
 import { nanoid } from 'nanoid';
 import Board from './Board';
 import newStartingBoard from './sudoku-generator';
+import React from 'react';
 
 
 function App() {
 
+
+
+
+   
+
+
   const generated_puzzle = newStartingBoard(10)[1];
+
+
+
+  const [puzzle_values,setPuzzle_values] = React.useState(puzzle_generate())
   console.log(generated_puzzle);
   let count = 0;
-  let puzzle_values = []
   function puzzle_generate()
-  {
+  { 
+    let pz_v = []
     for(let k = 0;k<9;k+=3)
     {
       for(let i = 0+k;i<3+k;i++)
       {
        for(let j = 0;j<3;j++)
        {
-         puzzle_values.push(generated_puzzle[i][j]);
+        pz_v.push(generated_puzzle[i][j]);
        }
    
       }
@@ -27,7 +38,7 @@ function App() {
       {
        for(let j = 3;j<6;j++)
        {
-         puzzle_values.push(generated_puzzle[i][j]);
+        pz_v.push(generated_puzzle[i][j]);
        }
    
       }
@@ -35,13 +46,13 @@ function App() {
       {
        for(let j = 6;j<9;j++)
        {
-         puzzle_values.push(generated_puzzle[i][j]);
+        pz_v.push(generated_puzzle[i][j]);
        }
    
       }
-    }   
+    }
+    return(pz_v);   
   }
-  puzzle_generate();
   
 
 
@@ -51,6 +62,10 @@ function App() {
 
 
 
+function handleChange(id)
+{
+  console.log(id);
+}
 
 
 
@@ -61,18 +76,6 @@ function App() {
 
 
 
-
-
-
-
-
-
-
-
-
-  function randomIntFromInterval(min, max) { // min and max included 
-    return Math.floor(Math.random() * (max - min + 1) + min)
-  }
 
 
   const box = ()=>{
@@ -80,7 +83,7 @@ function App() {
     let array = [];
     for(let i = 0;i<9;i++)
     {
-      array.push(<Board id = {obj[i].id} value={obj[i].value} isHeld = {obj[i].isHeld} />);
+      array.push(<Board id = {obj[i].id} value={obj[i].value} isHeld = {obj[i].isHeld} handleChange = {()=>handleChange(obj[i].id)}/>);
     }
     return(array);
   }
@@ -101,7 +104,6 @@ function App() {
     return(array);
   }
 
-
   const bigBox = ()=>{
     let array = [];
     for(let j = 0;j<9;j++)
@@ -113,11 +115,12 @@ function App() {
   }
 
 
+  const [bigBoss,setBigBoss] = React.useState(bigBox);
 
   return (
     <main className='main'>
       <div className='grid-container'>
-        {bigBox()}
+        {bigBoss}
       </div>
     </main>
     
