@@ -1,10 +1,17 @@
 
 .body{
    margin: 0;
-    background-color: #0B2434;
-    padding: 20px;
-}
 
+}
+.super-container{
+  background-color: #0B2434;
+  position:absolute;
+  top:0px;
+  right:0px;
+  bottom:0px;
+  left:0px;
+  padding: 20px;
+}
 .main{
      background-color: #F5F5F5;
     height: 400px;
@@ -44,4 +51,26 @@
 .sub-grid{
   display: grid;
   grid-template-columns: repeat(3,0fr);
+}
+.sudoku-title{
+  font-family: 'Press Start 2P', cursive;
+  text-align: center;
+  padding-top: 10%;
+  color: rgb(226, 234, 72);
+}
+.button-level{
+  font-family: 'Press Start 2P', cursive;
+  background-color: #2e2424;
+  border-radius: 10px;
+  width:100px;
+  height:40px;
+  color: rgb(21, 171, 179);
+  cursor: pointer;
+
+}
+.buttons-level{
+  display: flex;
+  justify-content: center;
+  gap:20px
+
 }
