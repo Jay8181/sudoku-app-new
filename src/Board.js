@@ -11,8 +11,8 @@ export default function Board(props)
 
     return(
            
-          props.isHeld ===true ?<input type = "text" className='small-box' defaultValue={props.val} />:
-         <input type = "text" key = {props.id} id = {props.id} className='small-box' value = {a} onChange = {handleChange}/>
+          props.isHeld ===true ?<input type = "text" className='small-box' value={props.val} />:
+         <input type = "text" key = {props.id} id = {props.id} className='small-box-fill' value = {a} onChange = {handleChange}/>
     )
     
 }

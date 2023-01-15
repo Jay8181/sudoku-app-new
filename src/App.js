@@ -4,12 +4,18 @@ import { nanoid } from 'nanoid';
 import Board from './Board';
 import newStartingBoard from './sudoku-generator';
 import React from 'react';
-
-
+import Confetti from 'react-confetti';
 function App() {  
-  const[puzzle_values,setPuzzleValue] = React.useState(allNewBoxes());
-  function allNewBoxes() {
-    const pz_v = (newStartingBoard(10)[1])
+
+  const [mother_board,setMotherBoard] = React.useState(newStartingBoard(10));
+  const [solvedBoard,setSolvedBoard] = React.useState(mother_board[2]);
+
+  const[puzzle_values,setPuzzleValue] = React.useState(allNewBoxes(mother_board[1]));
+  const [solved,setSolved] = React.useState(false);
+  function allNewBoxes(temp) {
+    const pz_v = temp;
+    console.log("Solved Board",solvedBoard);
+    console.log("Unsolved Board",pz_v);
     let newBoard = []
     for(let i = 0;i<9;i++)
     {
@@ -63,10 +69,44 @@ function generateObject(val)
      return BoardComponent;
   }
 const [mainBoard,changeMainBoard] = React.useState(createBoardComponent())
-React.useEffect(()=>{console.log(puzzle_values)},[puzzle_values])
+
+
+console.log(puzzle_values);
+
+React.useEffect(()=>{
+  let flag  =true;
+  let count = 0;
+  for(let i = 0;i<9;i++)
+  {
+    for(let j = 0;j<9;j++)
+    {
+    if(puzzle_values[count].val !== solvedBoard[i][j])
+        {
+          flag = false;
+          break;
+        }
+        count++;
+    }
+    
+  }
+  if(flag)
+  {
+    setSolved((prevState)=>{
+     return(!prevState);
+    })
+  }
+  console.log(flag);
+  console.log(count);
+}
+,[puzzle_values])
+
+
+
   return(<main className='main'>
+    {solved && <Confetti/>}
   <div className='grid-container'>
     {mainBoard}
+    
   </div>
 </main>)
 

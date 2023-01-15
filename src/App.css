@@ -23,6 +23,17 @@
   font-size: large;
   font-weight: bolder;
 }
+.small-box-fill
+{
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  font-size: large;
+  font-weight: bolder;
+  background-color:#b3f0f5;
+  
+
+}
 .grid-container{
   margin : 100px;
   display: grid;
