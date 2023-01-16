@@ -1,96 +1,62 @@
-<div className='sub-grid'>
-        {box()}
-        </div>
-        <div className='sub-grid'>
-        {box()}
-        </div>
-        <div className='sub-grid'>
-        {box()}
-        </div>
-        <div className='sub-grid'>
-        {box()}
-        </div>
-        <div className='sub-grid'>
-        {box()}
-        </div>
-        <div className='sub-grid'>
-        {box()}
-        </div>
-        <div className='sub-grid'>
-        {box()}
-        </div>
-        <div className='sub-grid'>
-        {box()}
-        </div>
-        <div className='sub-grid'>
-        {box()}
-        </div>
-
-
-
-
-
-
-
-
-
-import './App.css';
-import { nanoid } from 'nanoid';
-import Board from './Board';
-function App() {
-
-  const box = ()=>{
-    const obj = attributes();
-    let array = [];
-    for(let i = 0;i<9;i++)
-    {
-      array.push(<Board id = {obj[i].id} value={obj[i].value} isHeld = {obj[i].isHeld} />);
+class Solution {
+public:
+    vector<vector<int>> insert(vector<vector<int>>& intervals, vector<int>& newInterval) {
+        int n = intervals.size();
+        int index = -1;
+        for(int i = 0;i<n;i++)
+        {
+            if(intervals[i][0] <= newInterval[0] && intervals[i][1] >= newInterval[0])
+            {
+              index = i;
+                break;
+            }
+        }
+        int index1 = -1;
+        int i = index;
+        while(i < n)
+        {
+            cout<<i<<endl;
+            if(newInterval[1] <= intervals[i][1] && newInterval[1] >= intervals[i][0] )
+            {
+                index1 = i;
+                break;
+            }
+            i++;
+        }
+        cout<<index<<" "<<index1<<endl;
+        if(index == -1)
+        {
+            intervals.push_back(newInterval);
+            return(intervals);
+        }
+        vector<vector<int>>ans;
+        if(index1 == -1)
+        {
+            for(int i = 0;i<index;i++)
+            {
+                ans.push_back(intervals[i]);
+            }
+            ans.push_back({intervals[index][0],newInterval[1]});
+            if(index < n)
+            {
+                for(int i = index+1;i<n;i++)
+                {
+                    ans.push_back(intervals[i]);
+                }
+            }
+            return(ans);
+        }
+        for(int i = 0;i<index;i++)
+        {
+            ans.push_back(intervals[i]);
+        }
+        ans.push_back({intervals[index][0],intervals[index1][1]});
+        for(int i = index1+1;i<n;i++){
+            ans.push_back(intervals[i]);
+        }
+        return(ans);
+        
+        
+        return(intervals);
     }
-    return(array);
-  }
-
-  function randomIntFromInterval(min, max) { // min and max included 
-    return Math.floor(Math.random() * (max - min + 1) + min)
-  }
-  
-  const attributes = ()=>{
-    let array = [];
-    for(let i = 0;i<9;i++)
-    {
-        array.push({
-           id:nanoid(),
-           value:randomIntFromInterval(1,9),
-           isHeld : false,
-        });
-    }
-    return(array);
-  }
-
-
-  const bigBox = ()=>{
-    const a1 = box();
-    console.log(a1);
-    let array = [];
-    for(let i = 0;i<9;i++)
-    {
-      array.push(<div className='sub-grid'>{a1}</div>);
-    }
-    return(array)
-  }
-
-
-
-  return (
-    <main className='main'>
-      <div className='grid-container'>
-        {bigBox()}
-      </div>
-    </main>
-    
-  )
-}
-
-export default App;
-
-
-
+};
