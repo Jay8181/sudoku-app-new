@@ -21,7 +21,6 @@ input[type=number]::-webkit-outer-spin-button {
     background-color: #F5F5F5;
    height: 400px;
    max-width: auto;
-   border-radius: 5px;
    padding: 20px;
    display: flex;
    flex-direction: column;
@@ -34,61 +33,72 @@ input[type=number]::-webkit-outer-spin-button {
  text-align: center;
  font-size: large;
  font-weight: bold;
+ border-style: solid ;
+
 }
 .small-box-fill
 {
- width: 30px;
- height: 30px;
- text-align: center;
- font-size: large;
- font-weight: bold;
- background-color:#b3f0f5;
- 
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  font-size: large;
+  font-weight: bold;
+  background-color: aqua;
+  border-style: solid ;
 
 }
 .small-box:nth-of-type(3n){
-  border-right: 3px solid red !important;
+  border-right: 5px solid black;
 
 }
+
 .small-box-fill:nth-of-type(3n)
-{
-  border-right: 3px solid red !important;
+{ 
+  border-right: 5px solid black ;
 }
-.small-box:nth-of-type(n+19):nth-of-type(-n+28)
+.small-box:nth-of-type(9n){
+  border-right: 3px solid #666666 !important;
+
+}
+.small-box-fill:nth-of-type(9n){
+  border-right: 3px solid #666666 !important;
+
+}
+.small-box:nth-of-type(n+19):nth-of-type(-n+27)
 {
-  border-bottom: 3px solid red !important;
+  border-bottom: 5px solid black !important;
 }
 .small-box:nth-of-type(n+46):nth-of-type(-n+54)
 {
-  border-bottom: 3px solid red !important;
+  border-bottom: 5px solid black !important;
 }
-.small-box:nth-of-type(n+73):nth-of-type(-n+81){
-  border-bottom: 3px solid red !important;
-}
+
 
 .small-box-fill:nth-of-type(n+19):nth-of-type(-n+27)
 {
-  border-bottom: 3px solid red !important;
+  border-bottom: 5px solid black !important;
 }
 .small-box-fill:nth-of-type(n+46):nth-of-type(-n+54)
 {
-  border-bottom: 3px solid red !important;
+  border-bottom: 5px solid black !important;
 }
-.small-box-fill:nth-of-type(n+73):nth-of-type(-n+81){
-  border-bottom: 3px solid red !important;
-}
+
+
 
 .grid-container{
  margin : 100px;
  display: grid;
  grid-template: auto auto / repeat(9, 0.125fr);
  justify-content: center;
+
 }
 .sub-grid{
  display: grid;
  grid-template-columns: repeat(3,0fr);
+
 }
-.sudoku-title{
+.sudoku-title{ gap:5px;
+
  font-family: 'Press Start 2P', cursive;
  text-align: center;
  padding-top: 10%;

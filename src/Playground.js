@@ -9,9 +9,9 @@ export default function Playground(props) {
 
   const [mother_board,setMotherBoard] = React.useState(newStartingBoard(props.difficulty));
   const [solvedBoard,setSolvedBoard] = React.useState(mother_board[2]);
-
   const[puzzle_values,setPuzzleValue] = React.useState(allNewBoxes(mother_board[1]));
   const [solved,setSolved] = React.useState(false);
+  const [buttonB,setButton] = React.useState(false);
   function allNewBoxes(temp) {
     const pz_v = temp;
     console.log("Solved Board",solvedBoard);
@@ -40,12 +40,8 @@ function generateObject(val)
  function changeValue(id,value)
  {
   console.log("JAY");
-    // const{id,value} = event.target;
-    //console.log(event.target.id)
+
     console.log(value);
-    // setPuzzleValue((prevState)=>prevState.map((item)=>{
-    //    return(item.id === id? {...item,val:}:item);
-    // }))
     setPuzzleValue((prevState)=>{
       console.log("JAY")
       const a =[]
@@ -62,18 +58,40 @@ function generateObject(val)
  }
 
 
+
+
   function createBoardComponent()
   {
      const BoardComponent = puzzle_values.map(item =>
      <Board key = {item.id} id={item.id} isHeld={item.isHeld} val = {item.val} changeValue = {changeValue}/>)
      return BoardComponent;
   }
-const [mainBoard,changeMainBoard] = React.useState(createBoardComponent())
 
+  
+const [mainBoard,changeMainBoard] = React.useState(createBoardComponent())
+function setSolutionBoard()
+{
+  let count = 0;
+  const array = [];
+  for(let i = 0;i<9;i++)
+  {
+    for(let j = 0;j<9;j++)
+    {
+      array.push(<Board key = {puzzle_values[count].id} id = {puzzle_values[count].id} isHeld = {true} val={solvedBoard[i][j]}/>);
+    }
+  }
+  return(array);
+}
 
 console.log(puzzle_values);
 
-React.useEffect(()=>{
+function solution()
+{
+  setButton(true);
+}
+
+
+React.useEffect(()=>{ 
   let flag  =true;
   let count = 0;
   for(let i = 0;i<9;i++)
@@ -89,26 +107,44 @@ React.useEffect(()=>{
     }
     
   }
-  if(flag)
+  if(flag )
   {
     setSolved((prevState)=>{
      return(!prevState);
     })
   }
   console.log(flag);
-  console.log(count);
-}
+  console.log(count);}
+
 ,[puzzle_values])
+
+
+
+
+
+
+
   return(
-    <div className = 'super-container'>
-  <main className='main'>
-    {solved && <Confetti/>}
-  <div className='grid-container'>
-    {mainBoard}
-    
-  </div>
-</main>
+    <div>{buttonB === false ?<div className = 'super-container'>
+    <button onClick={solution}>solution</button>
+<main className='main'>
+  {solved && <Confetti/>}
+<div className='grid-container'>
+  {mainBoard}
 </div>
+</main>
+</div>:
+<div className = 'super-container'>
+<Confetti/>
+    <button onClick={solution}>solution</button>
+<main className='main'>
+  
+<div className='grid-container'>
+  {setSolutionBoard()}
+</div>
+</main>
+</div>}</div>
+    
 )
 
 }
