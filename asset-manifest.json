@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/sudoku-app-new/static/css/main.9e211c47.css",
+    "main.js": "/sudoku-app-new/static/js/main.dff083b6.js",
+    "static/js/787.a48af5f9.chunk.js": "/sudoku-app-new/static/js/787.a48af5f9.chunk.js",
+    "static/media/welcomeImage.jpg": "/sudoku-app-new/static/media/welcomeImage.999dce1dd60bdbc1f706.jpg",
+    "index.html": "/sudoku-app-new/index.html",
+    "main.9e211c47.css.map": "/sudoku-app-new/static/css/main.9e211c47.css.map",
+    "main.dff083b6.js.map": "/sudoku-app-new/static/js/main.dff083b6.js.map",
+    "787.a48af5f9.chunk.js.map": "/sudoku-app-new/static/js/787.a48af5f9.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.9e211c47.css",
+    "static/js/main.dff083b6.js"
+  ]
+}
