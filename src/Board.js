@@ -4,7 +4,6 @@ export default function Board(props)
 {
     const [a,setA] = React.useState("");
     const handleChange = event => {
-        console.log(event.target.value);
         setA(event.target.value);
         props.changeValue(props.id,event.target.value);
       };

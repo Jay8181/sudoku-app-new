@@ -35,7 +35,6 @@ export default function WelcomePage(props) {
     <div style={myStyle}>
         <h2 className='sudoku-title'>SUDOKU</h2>
         <div className='buttons-level'>
-            {console.log("Jay")}
         <button className='button-level' onClick={handleClick} name='Easy'>Easy</button>
         <button className='button-level'onClick={handleClick} name='Medium'>Medium</button>
         <button className='button-level'onClick={handleClick} name='Hard'>Hard</button>

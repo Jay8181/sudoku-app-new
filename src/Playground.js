@@ -6,7 +6,6 @@ import newStartingBoard from './sudoku-generator';
 import React from 'react';
 import Confetti from 'react-confetti';
 export default function Playground(props) {  
-
   const [mother_board,setMotherBoard] = React.useState(newStartingBoard(props.difficulty));
   const [solvedBoard,setSolvedBoard] = React.useState(mother_board[2]);
   const[puzzle_values,setPuzzleValue] = React.useState(allNewBoxes(mother_board[1]));
@@ -14,8 +13,7 @@ export default function Playground(props) {
   const [buttonB,setButton] = React.useState(false);
   function allNewBoxes(temp) {
     const pz_v = temp;
-    console.log("Solved Board",solvedBoard);
-    console.log("Unsolved Board",pz_v);
+
     let newBoard = []
     for(let i = 0;i<9;i++)
     {
@@ -36,14 +34,9 @@ function generateObject(val)
     
   })
 }
-
  function changeValue(id,value)
  {
-  console.log("JAY");
-
-    console.log(value);
     setPuzzleValue((prevState)=>{
-      console.log("JAY")
       const a =[]
       for(let i = 0;i<81;i++)
       {
@@ -52,13 +45,9 @@ function generateObject(val)
         else 
            a.push(prevState[i])
       }
-      console.log(a);
       return(a);
     })
  }
-
-
-
 
   function createBoardComponent()
   {
@@ -67,7 +56,6 @@ function generateObject(val)
      return BoardComponent;
   }
 
-  
 const [mainBoard,changeMainBoard] = React.useState(createBoardComponent())
 function setSolutionBoard()
 {
@@ -83,13 +71,10 @@ function setSolutionBoard()
   return(array);
 }
 
-console.log(puzzle_values);
-
 function solution()
 {
   setButton(true);
 }
-
 
 React.useEffect(()=>{ 
   let flag  =true;
@@ -113,35 +98,33 @@ React.useEffect(()=>{
      return(!prevState);
     })
   }
-  console.log(flag);
-  console.log(count);}
+}
 
 ,[puzzle_values])
 
-
-
-
-
-
-
   return(
     <div>{buttonB === false ?<div className = 'super-container'>
-    <button onClick={solution}>solution</button>
+   <button onClick={() => window.location.reload(false)} className = "button-k">New Game</button>
+
 <main className='main'>
   {solved && <Confetti/>}
 <div className='grid-container'>
+
   {mainBoard}
+  
 </div>
+<button onClick={solution}  className="button-g">SOLUTION</button>
 </main>
 </div>:
 <div className = 'super-container'>
 <Confetti/>
-    <button onClick={solution}>solution</button>
+   
 <main className='main'>
   
 <div className='grid-container'>
   {setSolutionBoard()}
 </div>
+<button onClick={() => window.location.reload(false)} className = "button-g">New Game</button>
 </main>
 </div>}</div>
     
